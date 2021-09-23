@@ -3,11 +3,6 @@ const router      = express.Router();
 const models      = require('../models');
 const crypto      = require('crypto');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
 
 router.get('/sign_up', function(req, res, next) {
   res.render("users/signup");
@@ -27,6 +22,15 @@ router.post('/sign_up', function(req, res, next) {
     salt: salt
   })
   res.redirect('/users/sign_up');
+})
+
+
+router.get('/login', function(req, res, next) {
+  res.render('users/login');
+});
+
+router.post('/login', function(req, res, next) {
+  let body = req.body;
 })
 
 module.exports = router;
