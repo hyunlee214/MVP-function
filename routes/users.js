@@ -1,19 +1,20 @@
-const express = require('express');
-const router = express.Router();
-const models = require('../models');
-const crypto = require('crypto');
-
+const express     = require('express');
+const router      = express.Router();
+const models      = require('../models');
+const crypto      = require('crypto');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+
 router.get('/sign_up', function(req, res, next) {
-  res.render('user/signup');
+  res.render("users/signup");
 });
 
-router.post("/sign_up", function(req, res, next){
+
+router.post("/sign_up", function(req,res,next){
   let body = req.body;
 
   models.user.create({
