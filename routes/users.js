@@ -13,21 +13,20 @@ router.get('/sign_up', function(req, res, next) {
   res.render("users/signup");
 });
 
-
-router.post("/sign_up", function(req,res,next){
+router.post('/sign_up', function(req, res, next) {
   let body = req.body;
 
-  models.user.create({
+  let inputPassword = body.password;
+  let salt = Math.round((new Date().valueOf() * Math.random())) + "";
+  let hashPassword = crypto.createHash('sha512').update(inputPassword + salt).digest('hex');
+
+  let result = models.user.create({
     name: body.userName,
     email: body.userEmail,
-    password: body.password
+    password: hashPassword,
+    salt: salt
   })
-  .then( result => {
-    res.redirect("/users/sign_up");
-  })
-  .catch( err => {
-    console.log(err)
-  })
+  res.redirect('/users/sign_up');
 })
 
 module.exports = router;
