@@ -3,6 +3,9 @@ const router      = express.Router();
 const models      = require('../models');
 const crypto      = require('crypto');
 
+router.get('/', function(req, res, next) {
+  res.send('main page');
+})
 
 router.get('/sign_up', function(req, res, next) {
   res.render("users/signup");
@@ -31,6 +34,18 @@ router.get('/login', function(req, res, next) {
 
 router.post('/login', function(req, res, next) {
   let body = req.body;
+
+  let inputPassword = body.password;
+  let salt = Math.round((new Date().valueOf() * Math.random())) + "";
+  let hashPassword = crypto.createHash('sha512').update(inputPassword + salt).digest('hex');
+  let dbPassword = result.dataVaules.password;
+
+  if (dbPassword === hashPassword) {
+    res.redirect('/users');
+  }
+  else {
+    res.redirect('/users/login')
+  }
 })
 
 module.exports = router;
