@@ -2,7 +2,7 @@ const express     = require('express');
 const router      = express.Router();
 const models      = require('../models');
 const crypto      = require('crypto');
-const { ESRCH } = require('constants');
+const { ESRCH }   = require('constants');
 
 
 router.get('/sign_up', function(req, res, next) {
@@ -65,7 +65,7 @@ router.get('/findID', function(req, res, next) {
 });
 
 router.post('findID', function(req, res, next) {
-  
+
 })
 
 module.exports = router;
