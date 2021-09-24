@@ -3,10 +3,11 @@ const express             = require('express');
 const path                = require('path');
 const cookieParser        = require('cookie-parser');
 const logger              = require('morgan');
+const models              = require("./models/index.js");
+
 
 const indexRouter         = require('./routes/index');
 const usersRouter         = require('./routes/users');
-const models              = require("./models/index.js");
 
 const app = express();
 

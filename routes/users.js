@@ -30,27 +30,29 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/login', function(req, res, next) {
-  res.render('users/login');s
+  res.render('users/login');
 });
 
-router.post('/login', function(req, res, next) {
+router.post('/login', async function(req, res, next) {
   let body = req.body;
 
-  let result = models.user.findOne({
+  let result = await models.user.findOne({
     where: {
       email: body.userEmail
     }
   });
 
-  let dbPassword = result.dataVaules.password;
+  let dbPassword = result.dataValues.password;
   let inputPassword = body.password;
-  let salt = result.dataVaules.salt;
+  let salt = result.dataValues.salt;
   let hashPassword = crypto.createHash('sha512').update(inputPassword + salt).digest('hex');
 
   if (dbPassword === hashPassword) {
+    // console.log('ok');
     res.redirect('/users');
   }
   else {
+    // console.l
     res.redirect('/users/login');
   }
 });
