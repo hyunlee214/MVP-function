@@ -2,6 +2,7 @@ const express     = require('express');
 const router      = express.Router();
 const models      = require('../models');
 const crypto      = require('crypto');
+const { ESRCH } = require('constants');
 
 
 router.get('/sign_up', function(req, res, next) {
@@ -48,13 +49,23 @@ router.post('/login', async function(req, res, next) {
   let hashPassword = crypto.createHash('sha512').update(inputPassword + salt).digest('hex');
 
   if (dbPassword === hashPassword) {
-    // console.log('ok');
+    console.log('login ok');
     res.redirect('/users');
   }
   else {
-    // console.l
+    console.log('login faild');
     res.redirect('/users/login');
   }
 });
+
+// -------------------------------------------
+
+router.get('/findID', function(req, res, next) {
+  res.render('users/findID');
+});
+
+router.post('findID', function(req, res, next) {
+  
+})
 
 module.exports = router;
