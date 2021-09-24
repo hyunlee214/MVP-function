@@ -68,4 +68,12 @@ router.post('findID', function(req, res, next) {
 
 })
 
+router.get('/findPW', function(req, res, next) {
+  res.render('users/findPW');
+})
+
+router.post('findPW', function(req, res, next) {
+
+})
+
 module.exports = router;
