@@ -54,11 +54,11 @@ router.post('/login', async function(req, res, next) {
   }
   else {
     console.log('login faild');
-    res.redirect('/users/login');
+    res.redirect('/users/login');   // 재 로그인 창 
   }
 });
 
-// -------------------------------------------
+// -------------------------------------------ㅊ
 
 router.get('/findID', function(req, res, next) {
   res.render('users/findID');
@@ -72,8 +72,22 @@ router.get('/findPW', function(req, res, next) {
   res.render('users/findPW');
 })
 
-router.post('findPW', function(req, res, next) {
+router.post('findPW', async function(req, res, next) {
+  let body = req.body;
+  
+  let result = await models.user.findOne({
+    where: {
+      email: body.userEmail
+    }
+  });
 
+  let dbEmail = result.dataValues.userEmail;
+  let sendEmail = body.userEmail
+
+  if (dbEmail === sendEmail) {
+    console.log ('send Email');
+    res.redirect('/users');
+  }
 })
 
 module.exports = router;

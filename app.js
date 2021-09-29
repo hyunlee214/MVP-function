@@ -3,13 +3,12 @@ const express             = require('express');
 const path                = require('path');
 const cookieParser        = require('cookie-parser');
 const logger              = require('morgan');
-const nodemailer          = require('nodemailer');
-
 const models              = require("./models/index.js");
 
 
 const indexRouter         = require('./routes/index');
 const usersRouter         = require('./routes/users');
+const multerRouter        = require('./routes/fileUpload');
 
 const app = express();
 
@@ -28,6 +27,7 @@ app
 app
   .use('/', indexRouter)
   .use('/users', usersRouter)
+  .use('/fileUpload', multerRouter);
 
 // catch 404 and forward to error handler
 app
