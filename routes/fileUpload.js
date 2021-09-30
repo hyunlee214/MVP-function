@@ -1,9 +1,8 @@
 const express = require('express');
-const { route } = require('.');
 const router = express.Router();
-const multer = express('multer');
+const multer = require('multer');
 
-let stroage = multer.diskStorage({
+const stroage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, 'uploadFile/')
   },
@@ -23,6 +22,7 @@ router.post('/uploadComplete', upload.single('imgFile'), (req, res) => {
   let file = req.file
   let result = {
     originalName : file.originalName,
+    size: file.size,
   }
   res.json(result);
 })
