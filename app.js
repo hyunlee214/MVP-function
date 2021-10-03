@@ -29,8 +29,8 @@ app
   .use('/users', usersRouter)
 
   // multer
-  .use('/upload', multerRouter)
-  .use('/upload', express.static('uploads'))
+  .use('/fileUpload', multerRouter)
+  .use('/fileUpload', express.static('uploads'))
 
 // catch 404 and forward to error handler
 app

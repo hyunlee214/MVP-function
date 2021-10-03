@@ -18,10 +18,11 @@ router.get('/uploadPage', (req, res) => {
   res.render('upload');         // ejs파일
 })
 
-router.post('/uploadComplete', upload.single('imgFile'), (req, res) => {
+router.post('/create', upload.single('imgFile'), (req, res) => {
   let file = req.file
+  
   let result = {
-    originalName : file.originalName,
+    originalName : file.originalname,
     size: file.size,
   }
   res.json(result);
