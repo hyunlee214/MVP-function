@@ -9,7 +9,7 @@ async function getAccessTokenForUserId(userId) {
 
 async function createUserOrLogin({
   platformUserId,
-
+  
 }) {
   const users = await getUsersCollection();
 
